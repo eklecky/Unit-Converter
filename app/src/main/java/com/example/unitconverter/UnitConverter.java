@@ -6,7 +6,6 @@ public class UnitConverter {
         INCH,
         CENTIMETER,
         FOOT,
-        YARD,
         METER,
         KILOMETER,
         MILE;
@@ -36,8 +35,6 @@ public class UnitConverter {
                     base = 2.54;
                 } else if (targetUnit == Unit.FOOT) {
                     base = 0.0833333;
-                } else if (targetUnit == Unit.YARD) {
-                    base = 0.0277778;
                 } else if (targetUnit == Unit.METER) {
                     base = 0.0254;
                 } else if (targetUnit == Unit.MILE) {
@@ -51,8 +48,6 @@ public class UnitConverter {
                     base = 0.393701;
                 } else if (targetUnit == Unit.FOOT) {
                     base = 0.0328084;
-                } else if (targetUnit == Unit.YARD) {
-                    base = 0.0109361;
                 } else if (targetUnit == Unit.METER) {
                     base = 0.01;
                 } else if (targetUnit == Unit.MILE) {
@@ -66,29 +61,12 @@ public class UnitConverter {
                     base = 12;
                 } else if (targetUnit == Unit.CENTIMETER) {
                     base = 30.48;
-                } else if (targetUnit == Unit.YARD) {
-                    base = 0.333333;
                 } else if (targetUnit == Unit.METER) {
                     base = 0.3048;
                 } else if (targetUnit == Unit.MILE) {
                     base = 0.000189394;
                 } else if (targetUnit == Unit.KILOMETER) {
                     base = 0.0003048;
-                }
-                break;
-            case YARD:
-                if (targetUnit == Unit.INCH) {
-                    base = 36;
-                } else if (targetUnit == Unit.CENTIMETER) {
-                    base = 91.44;
-                } else if (targetUnit == Unit.FOOT) {
-                    base = 3;
-                } else if (targetUnit == Unit.METER) {
-                    base = 0.9144;
-                } else if (targetUnit == Unit.MILE) {
-                    base = 0.000568182;
-                } else if (targetUnit == Unit.KILOMETER) {
-                    base = 0.0009144;
                 }
                 break;
             case METER:
@@ -98,8 +76,6 @@ public class UnitConverter {
                     base = 100;
                 } else if (targetUnit == Unit.FOOT) {
                     base = 3.28084;
-                } else if (targetUnit == Unit.YARD) {
-                    base = 1.09361;
                 } else if (targetUnit == Unit.MILE) {
                     base = 0.000621371;
                 } else if (targetUnit == Unit.KILOMETER) {
@@ -113,8 +89,6 @@ public class UnitConverter {
                     base = 160934;
                 } else if (targetUnit == Unit.FOOT) {
                     base = 5280;
-                } else if (targetUnit == Unit.YARD) {
-                    base = 1760;
                 } else if (targetUnit == Unit.METER) {
                     base = 1609.34;
                 } else if (targetUnit == Unit.KILOMETER) {
@@ -128,8 +102,6 @@ public class UnitConverter {
                     base = 100000;
                 } else if (targetUnit == Unit.FOOT) {
                     base = 3280.84;
-                } else if (targetUnit == Unit.YARD) {
-                    base = 1093.61;
                 } else if (targetUnit == Unit.METER) {
                     base = 1000;
                 } else if (targetUnit == Unit.MILE) {
@@ -140,7 +112,7 @@ public class UnitConverter {
 
         multiplier = base;
     }
-    // Convert the unit
+
     public double convert(double input) {
         return input * multiplier;
     }
