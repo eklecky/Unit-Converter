@@ -2,16 +2,17 @@ package com.example.unitconverter;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 
 import android.view.View;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,38 +20,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.units, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Spinner fromSpinner = findViewById(R.id.spinner_from);
+        Spinner toSpinner = findViewById(R.id.spinner_to);
+
+        fromSpinner.setAdapter(adapter);
+        toSpinner.setAdapter(adapter);
+
+
     }
+    public void convert(View view) {
+        Spinner fromSpinner, toSpinner;
+        EditText fromEditText, toEditText;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        fromSpinner = findViewById(R.id.spinner_from);
+        toSpinner = findViewById(R.id.spinner_to);
+        fromEditText = findViewById(R.id.editText_from);
+        toEditText = findViewById(R.id.editText_to);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        String fromString = (String) fromSpinner.getSelectedItem();
+        String toString = (String) toSpinner.getSelectedItem();
+        double input = Double.valueOf(fromEditText.getText().toString());
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        UnitConverter.Unit fromUnit = UnitConverter.Unit.fromString(fromString);
+        UnitConverter.Unit toUnit = UnitConverter.Unit.fromString(toString);
 
-        return super.onOptionsItemSelected(item);
+        UnitConverter converter = new UnitConverter(fromUnit, toUnit);
+        NumberFormat formatter = new DecimalFormat("###,###.#####");
+        double result = converter.convert(input);
+        toEditText.setText(formatter.format(result));
     }
 }
