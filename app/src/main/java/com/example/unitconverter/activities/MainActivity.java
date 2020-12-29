@@ -1,5 +1,6 @@
 package com.example.unitconverter.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.unitconverter.R;
@@ -21,6 +22,8 @@ import android.widget.Spinner;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import static com.example.unitconverter.lib.Utils.showInfoDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         toSpinner.setAdapter(adapter);
 
 
+
     }
 
     @Override
@@ -59,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            showSettings();
+            return true;
+        }
+        else if (id == R.id.action_about) {
+            showAbout();
             return true;
         }
 
@@ -85,5 +94,17 @@ public class MainActivity extends AppCompatActivity {
         NumberFormat formatter = new DecimalFormat("###,###.#####");
         double result = converter.convert(input);
         toEditText.setText(formatter.format(result));
+    }
+
+
+    private void showAbout() {
+        showInfoDialog(MainActivity.this, "About Unit Converter",
+                "A simple measuring unit converter; enjoy!\n" +
+                        "\nAndroid App by EK and JD.\neklecky@gmail.com");
+    }
+
+    private void showSettings() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivityForResult(intent, 1);
     }
 }
