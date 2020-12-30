@@ -1,7 +1,9 @@
 package com.example.unitconverter.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -13,12 +15,14 @@ import com.example.unitconverter.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
         attachFragment(savedInstanceState);
         setupActionBar();
+
     }
 
     private void attachFragment(Bundle savedInstanceState) {
@@ -34,9 +38,22 @@ public class SettingsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setDisplayShowHomeEnabled(true);
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId()== android.R.id.home) {
+            //finish();
+            onBackPressed();
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
@@ -46,15 +63,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        else {
-            return super.onOptionsItemSelected(item);
-        }
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
