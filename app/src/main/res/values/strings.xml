@@ -33,4 +33,8 @@
     <string name="github_repo">https://github.com/eklecky/Unit-Converter/tree/main</string>
     <string name="pref_header_about_versions">About App Versions</string>
     <string name="convert">Convert</string>
+    <string name="about_title">About Unit Converter</string>
+    <string name="about_message">A simple measuring unit converter; enjoy!\n</string>
+    <string name="about_closing">\nAndroid App by EK and JD.\neklecky@gmail.com</string>
+    <string name="decimal_format">###,###.#####</string>
 </resources>

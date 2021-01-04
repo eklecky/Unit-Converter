@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                (this, R.array.units, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         Spinner fromSpinner = (Spinner) findViewById(R.id.spinner_from);
@@ -91,16 +92,16 @@ public class MainActivity extends AppCompatActivity {
         UnitConverter.Unit toUnit = UnitConverter.Unit.fromString(toString);
 
         UnitConverter converter = new UnitConverter(fromUnit, toUnit);
-        NumberFormat formatter = new DecimalFormat("###,###.#####");
+        NumberFormat formatter = new DecimalFormat(getString(R.string.decimal_format));
         double result = converter.convert(input);
         toEditText.setText(formatter.format(result));
     }
 
 
     private void showAbout() {
-        showInfoDialog(MainActivity.this, "About Unit Converter",
-                "A simple measuring unit converter; enjoy!\n" +
-                        "\nAndroid App by EK and JD.\neklecky@gmail.com");
+        showInfoDialog(MainActivity.this, getString(R.string.about_title),
+                getString(R.string.about_message) +
+                        getString(R.string.about_closing));
     }
 
     private void showSettings() {
